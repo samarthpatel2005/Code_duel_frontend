@@ -12,12 +12,13 @@ import EmptyState from "@/components/common/EmptyState";
 import { useAuth } from "@/contexts/AuthContext";
 import { dashboardApi, challengeApi } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { Stats } from "@/types";
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
-  const [stats, setStats] = useState({
+  const [stats, setStats] = useState<Stats>({
     todayStatus: "pending",
     todaySolved: 0,
     todayTarget: 0,
@@ -64,8 +65,8 @@ const Dashboard: React.FC = () => {
         setStats({
           todayStatus:
             todaySummary?.completed === todaySummary?.totalChallenges
-              ? "completed"
-              : "pending",
+              ? ("completed" as const)
+              : ("pending" as const),
           todaySolved: todaySummary?.completed || 0,
           todayTarget: todaySummary?.totalChallenges || 0,
           currentStreak: statsData.currentStreak || 0,
@@ -90,7 +91,7 @@ const Dashboard: React.FC = () => {
       if (challengesResponse.success && challengesResponse.data) {
         setChallenges(challengesResponse.data);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Failed to load dashboard:", error);
       toast({
         title: "Failed to load dashboard",

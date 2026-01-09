@@ -10,6 +10,7 @@ import {
   Plus,
   LayoutDashboard,
   Settings,
+  Code,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -60,6 +61,12 @@ const Navbar: React.FC = () => {
               <Link to="/leaderboard" className="gap-2">
                 <Trophy className="h-4 w-4" />
                 Leaderboard
+              </Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/leetcode" className="gap-2">
+                <Code className="h-4 w-4" />
+                LeetCode
               </Link>
             </Button>
             <Button variant="ghost" size="sm" asChild>

@@ -18,17 +18,17 @@ const TodayStatus: React.FC<TodayStatusProps> = ({ stats, onComplete }) => {
   const isCompleted = stats.todayStatus === 'completed';
   const isFailed = stats.todayStatus === 'failed';
 
-  useEffect(() => {
-    if (isCompleted && !hasAnimated) {
-      setHasAnimated(true);
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#7c3aed', '#10b981', '#3b82f6', '#f59e0b']
-      });
-    }
-  }, [isCompleted, hasAnimated]);
+  // useEffect(() => {
+  //   if (isCompleted && !hasAnimated) {
+  //     setHasAnimated(true);
+  //     confetti({
+  //       particleCount: 100,
+  //       spread: 70,
+  //       origin: { y: 0.6 },
+  //       colors: ['#7c3aed', '#10b981', '#3b82f6', '#f59e0b']
+  //     });
+  //   }
+  // }, [isCompleted, hasAnimated]);
 
   const triggerConfetti = () => {
     confetti({

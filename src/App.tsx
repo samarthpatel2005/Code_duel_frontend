@@ -17,6 +17,7 @@ import Leaderboard from "./pages/Leaderboard";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Leetcode from "./pages/Leetcode";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,10 @@ const queryClient = new QueryClient();
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated ,isLoading } = useAuth();
+  if (isLoading) {
+    return null;
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -35,8 +39,10 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
 
 // Auth Route wrapper (redirect if already logged in)
 const AuthRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { isAuthenticated } = useAuth();
-
+  const { isAuthenticated , isLoading} = useAuth();
+  if (isLoading) {
+    return null;
+  }
   if (isAuthenticated) {
     return <Navigate to="/" replace />;
   }
@@ -71,6 +77,14 @@ const AppRoutes = () => {
       />
 
       {/* Protected Routes */}
+      <Route
+        path="/leetcode"
+        element={
+          <ProtectedRoute>
+            <Leetcode />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/dashboard"
         element={
