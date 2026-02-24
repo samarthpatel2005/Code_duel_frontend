@@ -59,10 +59,11 @@ const Register: React.FC = () => {
         description: 'Welcome to LeetCode Tracker.',
       });
       navigate('/');
-    } catch {
+    } catch (error) {
+      console.error('Registration failed:', error);
       toast({
         title: 'Registration failed',
-        description: 'Please try again.',
+        description: error instanceof Error ? error.message : 'Please try again.',
         variant: 'destructive',
       });
     }

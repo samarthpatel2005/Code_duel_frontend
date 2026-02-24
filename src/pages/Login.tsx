@@ -50,10 +50,11 @@ const Login: React.FC = () => {
         description: 'Successfully logged in.',
       });
       navigate('/');
-    } catch {
+    } catch (error) {
+      console.error('Login failed:', error);
       toast({
         title: 'Login failed',
-        description: 'Please check your credentials.',
+        description: error instanceof Error ? error.message : 'Please check your credentials.',
         variant: 'destructive',
       });
     }
